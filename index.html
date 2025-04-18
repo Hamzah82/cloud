@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cloud Storage - Dark</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hamzah's Cloud</title>
   <style>
     body {
       margin: 0;
@@ -43,18 +43,20 @@
       justify-content: space-between;
       align-items: center;
       transition: background 0.2s ease;
+      cursor: pointer;
     }
     li:hover {
       background-color: #2c2c2c;
     }
-    a {
+    .file-name {
+      font-weight: bold;
+      word-break: break-word;
       color: #4ea1ff;
-      text-decoration: none;
-      word-break: break-all;
     }
     .size {
       font-size: 14px;
       color: #aaa;
+      margin-left: 10px;
     }
   </style>
 </head>
@@ -78,8 +80,11 @@
           .filter(file => file.name.toLowerCase().includes(filter.toLowerCase()))
           .forEach(file => {
             const li = document.createElement("li");
+            li.onclick = () => {
+              window.open(file.url, "_blank");
+            };
             li.innerHTML = `
-              <a href="${file.url}" target="_blank">${file.name}</a>
+              <span class="file-name">${file.name}</span>
               <span class="size">${file.size || ""}</span>
             `;
             listEl.appendChild(li);
