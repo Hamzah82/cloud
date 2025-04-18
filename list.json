@@ -40,5 +40,26 @@
     "size": "0 MB",
     "type": "PDF File",
     "icon": "📄"
+  },
+  {
+    "name": "Python Cheat Sheet",
+    "url": "https://github.com/gto76/python-cheatsheet/raw/master/cheat_sheet.pdf",
+    "size": "2.1 MB",
+    "type": "PDF File",
+    "icon": "📄"
+  },
+  {
+    "name": "Visual Studio Code Installer",
+    "url": "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user",
+    "size": "85 MB",
+    "type": "EXE Installer",
+    "icon": "🖥️"
+  },
+  {
+    "name": "7-Zip Portable",
+    "url": "https://www.7-zip.org/a/7z2301-x64.exe",
+    "size": "1.4 MB",
+    "type": "EXE Installer",
+    "icon": "📦"
   }
 ]
