@@ -11,15 +11,21 @@
       background-color: #121212;
       color: #fff;
     }
+
     .container {
+      width: 100%;
       max-width: 800px;
       margin: 40px auto;
-      padding: 0 20px;
+      padding-left: 20px;
+      padding-right: 20px;
+      box-sizing: border-box;
     }
+
     h1 {
       text-align: center;
       margin-bottom: 30px;
     }
+
     input[type="text"] {
       width: 100%;
       padding: 10px;
@@ -29,11 +35,16 @@
       font-size: 16px;
       background-color: #1e1e1e;
       color: #fff;
+      box-sizing: border-box;
+      display: block;
     }
+
     ul {
       list-style: none;
       padding: 0;
+      margin: 0;
     }
+
     li {
       background-color: #1e1e1e;
       margin-bottom: 12px;
@@ -45,32 +56,39 @@
       transition: background 0.2s ease;
       cursor: pointer;
     }
+
     li:hover {
       background-color: #2c2c2c;
     }
+
     .left {
       display: flex;
       align-items: center;
     }
+
     .icon {
       font-size: 22px;
       margin-right: 12px;
     }
+
     .file-name {
       font-weight: bold;
       color: #4ea1ff;
       word-break: break-word;
     }
+
+    .type {
+      font-size: 12px;
+      color: #888;
+    }
+
     .info {
       text-align: right;
     }
+
     .size {
       font-size: 14px;
       color: #aaa;
-    }
-    .type {
-      font-size: 12px;
-      color: #666;
     }
   </style>
 </head>
