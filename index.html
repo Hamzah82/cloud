@@ -38,11 +38,30 @@
 </head>
 <body>
   <h1>📁 My Cloud Storage</h1>
-  <ul>
-    <li><a href="file1.pdf" download>file1.pdf</a></li>
-    <li><a href="image.jpg" download>image.jpg</a></li>
-    <li><a href="video.mp4" download>video.mp4</a></li>
-    <!-- Tambahin file lain di sini -->
+  <ul id="file-list">
+    <li>Loading files...</li>
   </ul>
+
+  <script>
+    fetch('list.json')
+      .then(response => response.json())
+      .then(files => {
+        const list = document.getElementById('file-list');
+        list.innerHTML = '';
+        files.forEach(file => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = file.url;
+          a.download = '';
+          a.textContent = file.name;
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+      })
+      .catch(err => {
+        document.getElementById('file-list').innerHTML = '<li>Failed to load file list.</li>';
+        console.error(err);
+      });
+  </script>
 </body>
 </html>
