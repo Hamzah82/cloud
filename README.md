@@ -35,13 +35,31 @@ By doing this, MEGA will reward this project with additional storage space. Your
 - `list.json`: Contains metadata for all listed files (name, size, URL, etc.)
 - Actual files are stored externally on MEGA
 
-## ⚠️ Notes
+## 💻 **Want to Contribute a File?**
+You can easily contribute a file to the archive by using the **Google Form** below. Please follow these steps:
+
+### How to Upload a File:
+1. **Go to the [Upload Form](https://forms.gle/aaLdQi5bVCHnV5Re8)**.
+2. Fill in the following details:
+   - **File Name**: Enter the name of the file you want to share.
+   - **Link to the File**: Paste the link from MEGA or another cloud storage.
+   - **Description**: A brief description of what the file contains (optional).
+   - **Category**: Choose the category that best fits the file (Ebook, Software, Video, etc.).
+   - **File Size**: Optional, but helpful.
+   - **Icon**: Optionally, select an emoji to represent the file.
+
+3. Once the form is submitted, your file will be reviewed and added to the archive.
+
+By contributing, you'll help keep the archive growing with useful resources for everyone!
+
+### ⚠️ Notes
 - Do **not** upload or share copyrighted or illegal material.
 - This project is intended for educational and personal use only.
 - Storage may be reset or limited due to MEGA restrictions.
+
+---
 
 ## 🙌 Thanks for Visiting!
 Your support keeps this little archive alive. If you find something useful or want to contribute, don't hesitate to reach out.
 
 **This is an independent project and is not affiliated with or endorsed by MEGA.**
-
