@@ -67,7 +67,7 @@
 
   <script>
     async function loadFiles() {
-      const res = await fetch("list.json");
+      const res = await fetch("list.json?v=" + Date.now());
       const files = await res.json();
       const listEl = document.getElementById("fileList");
       const searchEl = document.getElementById("search");
