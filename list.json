@@ -28,10 +28,10 @@
     "icon": "🎮"
   },
   {
-    "name": "Null",
-    "url": "https://google.com/",
+    "name": "Blank PDF",
+    "url": "hamzah.pdf",
     "size": "0 MB",
-    "type": "Unknown",
-    "icon": "❓"
+    "type": "PDF File",
+    "icon": "📄"
   }
 ]
