@@ -42,26 +42,27 @@
     <li>Loading files...</li>
   </ul>
 
-  <script>
-    fetch('list.json')
-      .then(response => response.json())
-      .then(files => {
-        const list = document.getElementById('file-list');
-        list.innerHTML = '';
-        files.forEach(file => {
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = file.url;
-          a.download = '';
-          a.textContent = file.name;
-          li.appendChild(a);
-          list.appendChild(li);
-        });
-      })
-      .catch(err => {
-        document.getElementById('file-list').innerHTML = '<li>Failed to load file list.</li>';
-        console.error(err);
+<script>
+  fetch('list.json?v=' + new Date().getTime())
+    .then(response => response.json())
+    .then(files => {
+      const list = document.getElementById('file-list');
+      list.innerHTML = '';
+      files.forEach(file => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = file.url;
+        a.download = '';
+        a.textContent = file.name;
+        li.appendChild(a);
+        list.appendChild(li);
       });
-  </script>
+    })
+    .catch(err => {
+      document.getElementById('file-list').innerHTML = '<li>Failed to load file list.</li>';
+      console.error(err);
+    });
+</script>
+
 </body>
 </html>
