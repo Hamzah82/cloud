@@ -53,8 +53,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: background 0.2s ease;
+      transition: background 0.2s ease, opacity 0.3s ease, transform 0.3s ease;
       cursor: pointer;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    li.fade-out {
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
     }
 
     li:hover {
@@ -99,47 +107,59 @@
     <ul id="fileList"></ul>
   </div>
 
-  <script>
-    async function loadFiles() {
-      const res = await fetch("list.json?v=" + Date.now());
-      const files = await res.json();
-      const listEl = document.getElementById("fileList");
-      const searchEl = document.getElementById("search");
+<script>
+  async function loadFiles() {
+    const res = await fetch("list.json?v=" + Date.now());
+    const files = await res.json();
+    const listEl = document.getElementById("fileList");
+    const searchEl = document.getElementById("search");
 
-      function renderList(filter = "") {
-        listEl.innerHTML = "";
-        files
-          .filter(file => file.name.toLowerCase().includes(filter.toLowerCase()))
-          .forEach(file => {
-            const li = document.createElement("li");
-            li.onclick = () => {
-              window.open(file.url, "_blank");
-            };
+    function renderList(filter = "") {
+      const visibleFiles = files.filter(file =>
+        file.name.toLowerCase().includes(filter.toLowerCase())
+      );
 
-            li.innerHTML = `
-              <div class="left">
-                <span class="icon">${file.icon || "📁"}</span>
-                <div>
-                  <div class="file-name">${file.name}</div>
-                  <div class="type">${file.type || ""}</div>
-                </div>
-              </div>
-              <div class="info">
-                <div class="size">${file.size || ""}</div>
-              </div>
-            `;
-            listEl.appendChild(li);
-          });
-      }
-
-      searchEl.addEventListener("input", () => {
-        renderList(searchEl.value);
+      // Fade out dulu
+      const currentItems = Array.from(listEl.children);
+      currentItems.forEach(item => {
+        item.classList.add("fade-out");
       });
 
-      renderList();
+      setTimeout(() => {
+        listEl.innerHTML = "";
+        visibleFiles.forEach(file => {
+          const li = document.createElement("li");
+          li.onclick = () => {
+            window.open(file.url, "_blank");
+          };
+
+          li.innerHTML = `
+            <div class="left">
+              <span class="icon">${file.icon || "📁"}</span>
+              <div>
+                <div class="file-name">${file.name}</div>
+                <div class="type">${file.type || ""}</div>
+              </div>
+            </div>
+            <div class="info">
+              <div class="size">${file.size || ""}</div>
+            </div>
+          `;
+
+          listEl.appendChild(li);
+        });
+      }, 200);
     }
 
-    loadFiles();
-  </script>
+    searchEl.addEventListener("input", () => {
+      renderList(searchEl.value);
+    });
+
+    renderList();
+  }
+
+  loadFiles();
+</script>
+
 </body>
 </html>
