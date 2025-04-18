@@ -53,16 +53,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: background 0.2s ease, opacity 0.3s ease, transform 0.3s ease;
       cursor: pointer;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    li.fade-out {
-      opacity: 0;
-      transform: translateY(10px);
-      pointer-events: none;
     }
 
     li:hover {
@@ -119,36 +110,29 @@
         file.name.toLowerCase().includes(filter.toLowerCase())
       );
 
-      // Fade out dulu
-      const currentItems = Array.from(listEl.children);
-      currentItems.forEach(item => {
-        item.classList.add("fade-out");
+      listEl.innerHTML = ""; // Clear the list first
+
+      visibleFiles.forEach(file => {
+        const li = document.createElement("li");
+        li.onclick = () => {
+          window.open(file.url, "_blank");
+        };
+
+        li.innerHTML = `
+          <div class="left">
+            <span class="icon">${file.icon || "📁"}</span>
+            <div>
+              <div class="file-name">${file.name}</div>
+              <div class="type">${file.type || ""}</div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="size">${file.size || ""}</div>
+          </div>
+        `;
+
+        listEl.appendChild(li);
       });
-
-      setTimeout(() => {
-        listEl.innerHTML = "";
-        visibleFiles.forEach(file => {
-          const li = document.createElement("li");
-          li.onclick = () => {
-            window.open(file.url, "_blank");
-          };
-
-          li.innerHTML = `
-            <div class="left">
-              <span class="icon">${file.icon || "📁"}</span>
-              <div>
-                <div class="file-name">${file.name}</div>
-                <div class="type">${file.type || ""}</div>
-              </div>
-            </div>
-            <div class="info">
-              <div class="size">${file.size || ""}</div>
-            </div>
-          `;
-
-          listEl.appendChild(li);
-        });
-      }, 200);
     }
 
     searchEl.addEventListener("input", () => {
