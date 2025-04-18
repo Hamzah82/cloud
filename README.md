@@ -1,37 +1,47 @@
-# My Cloud Storage on GitHub Pages
+# 📦 Data Center Archive
 
-Welcome to my simple cloud storage setup using GitHub Pages! This repository contains various files, including PDFs, images, and videos, that are publicly accessible via a single webpage. The goal of this repo is to make sharing resources easy and accessible.
+Welcome to the **Data Center**, a personal archive of useful and interesting files hosted on the cloud via **MEGA.nz**. This project was made to make sharing helpful resources easy and accessible.
 
-## 📂 File List
-The files are listed in the [index.html](index.html), and they are hosted via GitHub Pages. You can download them directly by clicking on the links.
+## 📁 What You'll Find Here
+This archive contains random but potentially useful files, including:
+- Modded APKs
+- Educational PDFs
+- Games
+- Tools and utilities
+- and much more!
 
-### Files Available:
-- **Materi**: Educational PDFs, notes, and other learning materials.
-- **Gambar**: Images related to projects, assignments, or presentations.
-- **Video**: Video files for tutorials, lessons, or other content.
+All files are listed in the `list.json` file and displayed through the main [index page](https://Hamzah82.github.io/cloud/).
 
-## 📝 How to Use
-1. Navigate to the [GitHub Pages link](https://Hamzah82.github.io/cloud/) to see the list of available files.
-2. Click on the file links to download them directly to your device.
-3. To add more files, simply upload them to this repository and update the `list.json` file to reflect the new additions.
+## 🔗 How to Access the Files
+1. Open the [Cloud Index Page](https://Hamzah82.github.io/cloud/)
+2. Browse and search for any file you need
+3. Click on the file to download it from MEGA
 
-## 🚨 Important Notes:
-- This repository is for **personal use** and for sharing non-sensitive, educational files.
-- Do not upload files that violate copyrights or GitHub's Terms of Service.
-- This repo does **not** provide a permanent cloud storage solution. Please back up important files to other storage services if necessary.
+## 📦 Storage Information
+All files are hosted on **MEGA.nz**. The free storage is limited to **20 GB**, so your support is needed to keep this archive alive and growing.
 
-## 📍 Repository Structure
-- `index.html`: The main page displaying the file list.
-- `list.json`: A JSON file that contains the list of downloadable files and their URLs.
-- File folders: Contain the actual files (e.g., PDFs, images, videos).
+## 💡 Want to Support This Project?
+You can help expand the storage by joining the MEGA referral system. Here's how:
 
-## ⚡ Limitations
-- GitHub Pages is intended for **static** content. Large files or excessive bandwidth may result in throttling or service restrictions.
-- The repository is limited to **100 MB per file** and **1 GB per repo**.
+1. Email me at **wokabi108@gmail.com** and mention you'd like to support the Data Center project.
+2. I will invite you through MEGA.
+3. You will receive an email from MEGA with a referral link.
+4. Simply click the link and install the MEGA app (mobile or desktop).
 
-## 💬 Contact
-Feel free to reach out if you have any questions or suggestions.
+By doing this, MEGA will reward this project with additional storage space. Your support means a lot!
 
----
+## 📂 Repository Contents
+- `index.html`: Web interface for browsing files
+- `list.json`: Contains metadata for all listed files (name, size, URL, etc.)
+- Actual files are stored externally on MEGA
 
-**Note**: This is a personal project and is not endorsed by GitHub. Use responsibly!
+## ⚠️ Notes
+- Do **not** upload or share copyrighted or illegal material.
+- This project is intended for educational and personal use only.
+- Storage may be reset or limited due to MEGA restrictions.
+
+## 🙌 Thanks for Visiting!
+Your support keeps this little archive alive. If you find something useful or want to contribute, don't hesitate to reach out.
+
+**This is an independent project and is not affiliated with or endorsed by MEGA.**
+
