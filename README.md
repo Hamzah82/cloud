@@ -11,7 +11,7 @@ The files are listed in the [index.html](index.html), and they are hosted via Gi
 - **Video**: Video files for tutorials, lessons, or other content.
 
 ## 📝 How to Use
-1. Navigate to the [GitHub Pages link](https://username.github.io/repo-name/) to see the list of available files.
+1. Navigate to the [GitHub Pages link](https://Hamzah82.github.io/cloud/) to see the list of available files.
 2. Click on the file links to download them directly to your device.
 3. To add more files, simply upload them to this repository and update the `list.json` file to reflect the new additions.
 
