@@ -10,10 +10,10 @@ This archive contains random but potentially useful files, including:
 - Tools and utilities
 - and much more!
 
-All files are listed in the `list.json` file and displayed through the main [index page](https://Hamzah82.github.io/cloud/).
+All files are listed in the `list.json` file and displayed through the main [index page](https://dacent.vercel.app/).
 
 ## 🔗 How to Access the Files
-1. Open the [Cloud Index Page](https://Hamzah82.github.io/cloud/)
+1. Open the [Cloud Index Page](https://dacent.vercel.app/)
 2. Browse and search for any file you need
 3. Click on the file to download it from MEGA
 
