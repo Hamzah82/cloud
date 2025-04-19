@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Data Center</title>
+  <script type="module" src="supabase.js"></script>
   <style>
     body {
       margin: 0;
@@ -118,6 +119,11 @@
       font-size: 14px;
       color: #aaa;
     }
+
+    .count {
+      font-size: 14px;
+      color: #bbb;
+    }
   </style>
 </head>
 <body>
@@ -145,7 +151,37 @@
     <ul id="fileList"></ul>
   </div>
 
-  <script>
+  <script type="module">
+    import { supabase } from './supabase.js';
+
+    async function incrementDownload(fileName) {
+      const { data, error } = await supabase
+        .from('downloads')
+        .select('count')
+        .eq('name', fileName)
+        .single();
+
+      if (data) {
+        await supabase
+          .from('downloads')
+          .update({ count: data.count + 1 })
+          .eq('name', fileName);
+      } else {
+        await supabase
+          .from('downloads')
+          .insert([{ name: fileName, count: 1 }]);
+      }
+    }
+
+    async function getDownloadCount(fileName) {
+      const { data, error } = await supabase
+        .from('downloads')
+        .select('count')
+        .eq('name', fileName)
+        .single();
+      return data?.count || 0;
+    }
+
     async function loadFiles() {
       const res = await fetch("list.json?v=" + Date.now());
       const files = await res.json();
@@ -159,34 +195,33 @@
 
         listEl.innerHTML = "";
 
-        visibleFiles.forEach((file, index) => {
+        visibleFiles.forEach(async (file, index) => {
+          const count = await getDownloadCount(file.name);
+
           const li = document.createElement("li");
-
-          // Pengecekan URL internal atau eksternal
-          if (file.url.startsWith("/")) {
-            li.onclick = () => {
-              window.location.href = file.url;
-            };
-          } else {
-            li.onclick = () => {
-              window.open(file.url, "_blank");
-            };
-          }
-
-          const number = visibleFiles.length - index;
 
           li.innerHTML = `
             <div class="left">
               <span class="icon">${file.icon || "📁"}</span>
               <div>
-                <div class="file-name">${number}. ${file.name}</div>
+                <div class="file-name">${visibleFiles.length - index}. ${file.name}</div>
                 <div class="type">${file.type || ""}</div>
               </div>
             </div>
             <div class="info">
               <div class="size">${file.size || ""}</div>
+              <div class="count">${count}x</div>
             </div>
           `;
+
+          li.onclick = async () => {
+            await incrementDownload(file.name);
+            if (file.url === "/end") {
+              window.location.href = file.url;
+            } else {
+              window.open(file.url, "_blank");
+            }
+          };
 
           listEl.appendChild(li);
         });
