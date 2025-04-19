@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Data Center</title>
-  <script type="module" src="supabase.js"></script>
   <style>
     body {
       margin: 0;
@@ -14,12 +13,9 @@
     }
 
     .container {
-      width: 100%;
       max-width: 800px;
       margin: 40px auto;
-      padding-left: 20px;
-      padding-right: 20px;
-      box-sizing: border-box;
+      padding: 0 20px;
     }
 
     h1 {
@@ -93,7 +89,6 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 16px;
-      box-sizing: border-box;
       transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
@@ -152,46 +147,26 @@
   </div>
 
   <script type="module">
-    import { supabase } from './supabase.js';
-
-    // Fungsi untuk menambah count download
-    async function incrementDownload(fileName) {
-      const { data, error } = await supabase
-        .from('downloads')
-        .select('count')
-        .eq('name', fileName)
-        .single();
-
-      if (data) {
-        await supabase
-          .from('downloads')
-          .update({ count: data.count + 1 })
-          .eq('name', fileName);
-      } else {
-        await supabase
-          .from('downloads')
-          .insert([{ name: fileName, count: 1 }]);
-      }
-    }
-
-    // Fungsi untuk mengambil jumlah download
     async function getDownloadCount(fileName) {
-      const { data, error } = await supabase
-        .from('downloads')
-        .select('count')
-        .eq('name', fileName)
-        .single();
-      return data?.count || 0;
+      const res = await fetch(`/api/download.js?name=${encodeURIComponent(fileName)}`);
+      const data = await res.json();
+      return data.count || 0;
     }
 
-    // Fungsi untuk memuat file dari list.json
+    async function incrementDownload(fileName) {
+      await fetch('/api/download.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: fileName })
+      });
+    }
+
     async function loadFiles() {
       const res = await fetch("list.json?v=" + Date.now());
       const files = await res.json();
       const listEl = document.getElementById("fileList");
       const searchEl = document.getElementById("search");
 
-      // Fungsi untuk merender daftar file dengan filter
       function renderList(filter = "") {
         const visibleFiles = files.filter(file =>
           file.name.toLowerCase().includes(filter.toLowerCase())
@@ -201,7 +176,6 @@
 
         visibleFiles.forEach(async (file, index) => {
           const count = await getDownloadCount(file.name);
-
           const li = document.createElement("li");
 
           li.innerHTML = `
@@ -220,18 +194,13 @@
 
           li.onclick = async () => {
             await incrementDownload(file.name);
-            if (file.url === "/end") {
-              window.location.href = file.url;
-            } else {
-              window.open(file.url, "_blank");
-            }
+            window.open(file.url, "_blank");
           };
 
           listEl.appendChild(li);
         });
       }
 
-      // Event listener untuk filter pencarian
       searchEl.addEventListener("input", () => {
         renderList(searchEl.value);
       });
