@@ -154,6 +154,7 @@
   <script type="module">
     import { supabase } from './supabase.js';
 
+    // Fungsi untuk menambah count download
     async function incrementDownload(fileName) {
       const { data, error } = await supabase
         .from('downloads')
@@ -173,6 +174,7 @@
       }
     }
 
+    // Fungsi untuk mengambil jumlah download
     async function getDownloadCount(fileName) {
       const { data, error } = await supabase
         .from('downloads')
@@ -182,12 +184,14 @@
       return data?.count || 0;
     }
 
+    // Fungsi untuk memuat file dari list.json
     async function loadFiles() {
       const res = await fetch("list.json?v=" + Date.now());
       const files = await res.json();
       const listEl = document.getElementById("fileList");
       const searchEl = document.getElementById("search");
 
+      // Fungsi untuk merender daftar file dengan filter
       function renderList(filter = "") {
         const visibleFiles = files.filter(file =>
           file.name.toLowerCase().includes(filter.toLowerCase())
@@ -227,6 +231,7 @@
         });
       }
 
+      // Event listener untuk filter pencarian
       searchEl.addEventListener("input", () => {
         renderList(searchEl.value);
       });
