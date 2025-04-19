@@ -82,18 +82,21 @@
     }
 
     .upload-btn {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 25px;
-  border-radius: 6px;
-  background-color: #4ea1ff;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 16px;
-  box-sizing: border-box;
+      display: block;
+      padding: 10px;
+      margin-bottom: 25px;
+      border-radius: 6px;
+      background-color: #4ea1ff;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .upload-btn.status {
+      background-color: #2d7acc;
     }
 
     .info {
@@ -106,77 +109,76 @@
     }
   </style>
 </head>
-<!-- Tambahkan ini di dalam <body>, ganti bagian tombol upload yang lama -->
-<div class="container">
-  <h1>💾 Data Center 🖥️</h1>
-  <p style="text-align:center; font-size: 14px; color: #aaa; margin-top: -20px; margin-bottom: 30px;">
-    Made with 💙 by hamzah82
-  </p>
-<input type="text" id="search" placeholder="Search files..." />
+<body>
 
-<div style="display: flex; gap: 10px; margin-bottom: 25px;">
-  <a href="https://forms.gle/aaLdQi5bVCHnV5Re8" target="_blank" class="upload-btn" style="flex: 3;">
-    + Upload File
-  </a>
-  <a href="/status" class="upload-btn" style="flex: 1; background-color: #2d7acc;">
-    📊 Status
-  </a>
-</div>
+  <div class="container">
+    <h1>💾 Data Center 🖥️</h1>
+    <p style="text-align:center; font-size: 14px; color: #aaa; margin-top: -20px; margin-bottom: 30px;">
+      Made with 💙 by hamzah82
+    </p>
 
+    <input type="text" id="search" placeholder="Search files..." />
 
-<ul id="fileList"></ul>
-</div>
-
-<script>
-  async function loadFiles() {
-    const res = await fetch("list.json?v=" + Date.now());
-    const files = await res.json();
-    const listEl = document.getElementById("fileList");
-    const searchEl = document.getElementById("search");
-
-    function renderList(filter = "") {
-      const visibleFiles = files.filter(file =>
-        file.name.toLowerCase().includes(filter.toLowerCase())
-      );
-
-      listEl.innerHTML = ""; // Clear the list first
-
-visibleFiles.forEach((file, index) => {
-  const li = document.createElement("li");
-  li.onclick = () => {
-    window.open(file.url, "_blank");
-  };
-
-  const number = visibleFiles.length - index;
-
-  li.innerHTML = `
-    <div class="left">
-      <span class="icon">${file.icon || "📁"}</span>
-      <div>
-        <div class="file-name">${number}. ${file.name}</div>
-        <div class="type">${file.type || ""}</div>
-      </div>
+    <div style="display: flex; gap: 10px; margin-bottom: 25px;">
+      <a href="https://forms.gle/aaLdQi5bVCHnV5Re8" target="_blank" class="upload-btn" style="flex: 3;">
+        + Upload File
+      </a>
+      <a href="/status" class="upload-btn status" style="flex: 1;">
+        📊 Status
+      </a>
     </div>
-    <div class="info">
-      <div class="size">${file.size || ""}</div>
-    </div>
-  `;
 
-  listEl.appendChild(li);
-});
+    <ul id="fileList"></ul>
+  </div>
 
+  <script>
+    async function loadFiles() {
+      const res = await fetch("list.json?v=" + Date.now());
+      const files = await res.json();
+      const listEl = document.getElementById("fileList");
+      const searchEl = document.getElementById("search");
 
+      function renderList(filter = "") {
+        const visibleFiles = files.filter(file =>
+          file.name.toLowerCase().includes(filter.toLowerCase())
+        );
+
+        listEl.innerHTML = ""; // Clear the list first
+
+        visibleFiles.forEach((file, index) => {
+          const li = document.createElement("li");
+          li.onclick = () => {
+            window.open(file.url, "_blank");
+          };
+
+          const number = visibleFiles.length - index;
+
+          li.innerHTML = `
+            <div class="left">
+              <span class="icon">${file.icon || "📁"}</span>
+              <div>
+                <div class="file-name">${number}. ${file.name}</div>
+                <div class="type">${file.type || ""}</div>
+              </div>
+            </div>
+            <div class="info">
+              <div class="size">${file.size || ""}</div>
+            </div>
+          `;
+
+          listEl.appendChild(li);
+        });
+      }
+
+      searchEl.addEventListener("input", () => {
+        renderList(searchEl.value);
+      });
+
+      renderList();
     }
 
-    searchEl.addEventListener("input", () => {
-      renderList(searchEl.value);
-    });
-
-    renderList();
-  }
-
-  loadFiles();
-</script>
+    loadFiles();
+  </script>
 
 </body>
 </html>
