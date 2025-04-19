@@ -29,7 +29,7 @@
     input[type="text"] {
       width: 100%;
       padding: 10px;
-      margin-bottom: 15px; /* Menyamakan jarak dengan tombol upload */
+      margin-bottom: 15px;
       border-radius: 6px;
       border: none;
       font-size: 16px;
@@ -84,7 +84,7 @@
     .upload-btn {
       display: block;
       padding: 10px;
-      margin-bottom: 5px; /* Menyamakan jarak dengan input search */
+      margin-bottom: 5px;
       border-radius: 6px;
       background-color: #4ea1ff;
       color: white;
@@ -101,13 +101,13 @@
     }
 
     .upload-btn:hover {
-      background-color: #3b8bcc; /* Warna saat hover pada tombol Upload */
-      transform: scale(1.05); /* Sedikit membesar saat hover */
+      background-color: #3b8bcc;
+      transform: scale(1.05);
     }
 
     .upload-btn.status:hover {
-      background-color: #276db1; /* Warna saat hover pada tombol Status */
-      transform: scale(1.05); /* Sedikit membesar saat hover */
+      background-color: #276db1;
+      transform: scale(1.05);
     }
 
     .info {
@@ -131,16 +131,16 @@
     <input type="text" id="search" placeholder="Search files..." />
 
     <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-  <a href="https://forms.gle/aaLdQi5bVCHnV5Re8" target="_blank" class="upload-btn" style="flex: 2;">
-    + Upload File
-  </a>
-  <a href="/about" class="upload-btn status" style="flex: 1;">
-    About
-  </a>
-  <a href="/status" class="upload-btn status" style="flex: 1;">
-    Status
-  </a>
-</div>
+      <a href="https://forms.gle/aaLdQi5bVCHnV5Re8" target="_blank" class="upload-btn" style="flex: 2;">
+        + Upload File
+      </a>
+      <a href="/about" class="upload-btn status" style="flex: 1;">
+        About
+      </a>
+      <a href="/status" class="upload-btn status" style="flex: 1;">
+        Status
+      </a>
+    </div>
 
     <ul id="fileList"></ul>
   </div>
@@ -157,13 +157,21 @@
           file.name.toLowerCase().includes(filter.toLowerCase())
         );
 
-        listEl.innerHTML = ""; // Clear the list first
+        listEl.innerHTML = "";
 
         visibleFiles.forEach((file, index) => {
           const li = document.createElement("li");
-          li.onclick = () => {
-            window.open(file.url, "_blank");
-          };
+
+          // Pengecekan URL internal atau eksternal
+          if (file.url.startsWith("/")) {
+            li.onclick = () => {
+              window.location.href = file.url;
+            };
+          } else {
+            li.onclick = () => {
+              window.open(file.url, "_blank");
+            };
+          }
 
           const number = visibleFiles.length - index;
 
