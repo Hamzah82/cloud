@@ -57,6 +57,14 @@ By contributing, you'll help keep the archive growing with useful resources for 
 - This project is intended for educational and personal use only.
 - Storage may be reset or limited due to MEGA restrictions.
 
+## 👨‍💻 Who Made This?
+
+This entire project was built and maintained **solo** by just **one person** using a **single laptop powered by a humble Pentium processor** 🥲.  
+
+Everything — from coding the site, collecting files, organizing data, to manually updating the archive — is done by hand. So if your uploaded file doesn’t appear instantly, **please be patient**, it might take a little time 🙏
+
+I’m doing my best to keep this place running smooth and helpful for everyone ❤️
+
 ---
 
 ## 🙌 Thanks for Visiting!
