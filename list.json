@@ -96,5 +96,12 @@
     "size": "1.4 MB",
     "type": "EXE Installer",
     "icon": "📦"
+  },
+  {
+    "name": "THE END",
+    "url": "/",
+    "size": "1 TB",
+    "type": "You reach end of page",
+    "icon": "🚧"
   }
 ]
