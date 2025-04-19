@@ -81,6 +81,21 @@
       color: #888;
     }
 
+    .upload-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 25px;
+  border-radius: 6px;
+  background-color: #4ea1ff;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  box-sizing: border-box;
+    }
+
     .info {
       text-align: right;
     }
@@ -94,11 +109,13 @@
 <!-- Tambahkan ini di dalam <body>, ganti bagian tombol upload yang lama -->
 <div class="container">
   <h1>💾 Data Center 🖥️</h1>
-  <input type="text" id="search" placeholder="Search files..." />
-  <a href="https://forms.gle/aaLdQi5bVCHnV5Re8" target="_blank" style="display: block; width: 100%; background-color: #4ea1ff; color: white; padding: 10px; border-radius: 6px; text-align: center; text-decoration: none; font-weight: bold; margin-bottom: 25px;">
-    + Upload File
-  </a>
-  <ul id="fileList"></ul>
+<input type="text" id="search" placeholder="Search files..." />
+
+<a href="https://forms.gle/aaLdQi5bVCHnV5Re8" target="_blank" class="upload-btn">
+  + Upload File
+</a>
+
+<ul id="fileList"></ul>
 </div>
 
 <script>
