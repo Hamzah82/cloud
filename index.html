@@ -135,7 +135,7 @@
 
       listEl.innerHTML = ""; // Clear the list first
 
-visibleFiles.reverse().forEach((file, index) => {
+visibleFiles.forEach((file, index) => {
   const li = document.createElement("li");
   li.onclick = () => {
     window.open(file.url, "_blank");
@@ -158,6 +158,7 @@ visibleFiles.reverse().forEach((file, index) => {
 
   listEl.appendChild(li);
 });
+
 
     }
 
