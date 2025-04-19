@@ -92,7 +92,7 @@
   },
   {
     "name": "THE END",
-    "url": "about",
+    "url": "/end",
     "size": "END",
     "type": "You reach end of page",
     "icon": "🚧"
