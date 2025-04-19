@@ -148,13 +148,13 @@
 
   <script type="module">
     async function getDownloadCount(fileName) {
-      const res = await fetch(`/api/download.js?name=${encodeURIComponent(fileName)}`);
+      const res = await fetch(`/download.js?name=${encodeURIComponent(fileName)}`);
       const data = await res.json();
       return data.count || 0;
     }
 
     async function incrementDownload(fileName) {
-      await fetch('/api/download.js', {
+      await fetch('/download.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: fileName })
