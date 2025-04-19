@@ -13,9 +13,12 @@
     }
 
     .container {
+      width: 100%;
       max-width: 800px;
       margin: 40px auto;
-      padding: 0 20px;
+      padding-left: 20px;
+      padding-right: 20px;
+      box-sizing: border-box;
     }
 
     h1 {
@@ -89,6 +92,7 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 16px;
+      box-sizing: border-box;
       transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
@@ -113,11 +117,6 @@
     .size {
       font-size: 14px;
       color: #aaa;
-    }
-
-    .count {
-      font-size: 14px;
-      color: #bbb;
     }
   </style>
 </head>
@@ -146,21 +145,7 @@
     <ul id="fileList"></ul>
   </div>
 
-  <script type="module">
-    async function getDownloadCount(fileName) {
-      const res = await fetch(`/download.js?name=${encodeURIComponent(fileName)}`);
-      const data = await res.json();
-      return data.count || 0;
-    }
-
-    async function incrementDownload(fileName) {
-      await fetch('/download.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: fileName })
-      });
-    }
-
+  <script>
     async function loadFiles() {
       const res = await fetch("list.json?v=" + Date.now());
       const files = await res.json();
@@ -174,28 +159,34 @@
 
         listEl.innerHTML = "";
 
-        visibleFiles.forEach(async (file, index) => {
-          const count = await getDownloadCount(file.name);
+        visibleFiles.forEach((file, index) => {
           const li = document.createElement("li");
+
+          // Pengecekan URL internal atau eksternal
+          if (file.url.startsWith("/")) {
+            li.onclick = () => {
+              window.location.href = file.url;
+            };
+          } else {
+            li.onclick = () => {
+              window.open(file.url, "_blank");
+            };
+          }
+
+          const number = visibleFiles.length - index;
 
           li.innerHTML = `
             <div class="left">
               <span class="icon">${file.icon || "📁"}</span>
               <div>
-                <div class="file-name">${visibleFiles.length - index}. ${file.name}</div>
+                <div class="file-name">${number}. ${file.name}</div>
                 <div class="type">${file.type || ""}</div>
               </div>
             </div>
             <div class="info">
               <div class="size">${file.size || ""}</div>
-              <div class="count">${count}x</div>
             </div>
           `;
-
-          li.onclick = async () => {
-            await incrementDownload(file.name);
-            window.open(file.url, "_blank");
-          };
 
           listEl.appendChild(li);
         });
