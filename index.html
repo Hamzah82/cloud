@@ -16,20 +16,27 @@
       width: 100%;
       max-width: 800px;
       margin: 40px auto;
-      padding-left: 20px;
-      padding-right: 20px;
+      padding: 0 20px;
       box-sizing: border-box;
     }
 
     h1 {
       text-align: center;
+      margin-bottom: 20px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 14px;
+      color: #aaa;
+      margin-top: -10px;
       margin-bottom: 30px;
     }
 
     input[type="text"] {
       width: 100%;
-      padding: 10px;
-      margin-bottom: 15px; /* Menyamakan jarak dengan tombol upload */
+      padding: 12px;
+      margin-bottom: 20px;
       border-radius: 6px;
       border: none;
       font-size: 16px;
@@ -37,6 +44,25 @@
       color: #fff;
       box-sizing: border-box;
       display: block;
+    }
+
+    .upload-btn {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      background-color: #4ea1ff;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      box-sizing: border-box;
+      display: block;
+    }
+
+    .status-btn {
+      background-color: #2d7acc;
     }
 
     ul {
@@ -81,24 +107,6 @@
       color: #888;
     }
 
-    .upload-btn {
-      display: block;
-      padding: 10px;
-      margin-bottom: 15px; /* Menyamakan jarak dengan input search */
-      border-radius: 6px;
-      background-color: #4ea1ff;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-
-    .upload-btn.status {
-      background-color: #2d7acc;
-    }
-
     .info {
       text-align: right;
     }
@@ -107,23 +115,31 @@
       font-size: 14px;
       color: #aaa;
     }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .button-group a {
+      flex: 1;
+    }
   </style>
 </head>
 <body>
 
   <div class="container">
     <h1>💾 Data Center 🖥️</h1>
-    <p style="text-align:center; font-size: 14px; color: #aaa; margin-top: -20px; margin-bottom: 30px;">
-      Made with 💙 by hamzah82
-    </p>
+    <p>Made with 💙 by hamzah82</p>
 
     <input type="text" id="search" placeholder="Search files..." />
 
-    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-      <a href="https://forms.gle/aaLdQi5bVCHnV5Re8" target="_blank" class="upload-btn" style="flex: 3;">
+    <div class="button-group">
+      <a href="https://forms.gle/aaLdQi5bVCHnV5Re8" target="_blank" class="upload-btn">
         + Upload File
       </a>
-      <a href="/status" class="upload-btn status" style="flex: 1;">
+      <a href="/status" class="upload-btn status">
         📊 Status
       </a>
     </div>
