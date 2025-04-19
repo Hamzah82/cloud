@@ -70,13 +70,6 @@
     "icon": "🎮"
   },
   {
-    "name": "Blank PDF",
-    "url": "hamzah.pdf",
-    "size": "0 MB",
-    "type": "PDF File",
-    "icon": "📄"
-  },
-  {
     "name": "Python Cheat Sheet",
     "url": "https://github.com/gto76/python-cheatsheet/raw/master/cheat_sheet.pdf",
     "size": "2.1 MB",
