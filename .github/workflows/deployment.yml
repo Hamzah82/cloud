@@ -16,16 +16,22 @@ jobs:
     - name: Deploy to Vercel
       run: |
         npm install -g vercel
-        vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+        vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
 
     - name: Get Vercel deployments
       run: |
         deployments=$(vercel ls --json --token ${{ secrets.VERCEL_TOKEN }} | jq -r '.[].uid')
         echo "Deployments: $deployments"
-        
+
     - name: Remove old deployments
       run: |
-        old_deployment=$(vercel ls --json --token ${{ secrets.VERCEL_TOKEN }} | jq -r '.[1].uid') # Ambil deployment kedua
+        # Ambil list deployment dan simpan UID
+        deployments=$(vercel ls --json --token ${{ secrets.VERCEL_TOKEN }} | jq -r '.[].uid')
+        
+        # Ambil deployment kedua dan lebih lama (jika ada)
+        old_deployment=$(echo "$deployments" | sed -n '2p')  # Ambil deployment kedua dari list
+
         if [ ! -z "$old_deployment" ]; then
+          echo "Removing old deployment $old_deployment"
           vercel rm $old_deployment --token ${{ secrets.VERCEL_TOKEN }} --yes
         fi
