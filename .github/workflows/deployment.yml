@@ -20,18 +20,26 @@ jobs:
 
     - name: Get Vercel deployments
       run: |
-        deployments=$(vercel ls --json --token ${{ secrets.VERCEL_TOKEN }} | jq -r '.[].uid')
+        # Mendapatkan list deployment dan memproses output dengan jq
+        deployments=$(vercel ls --token ${{ secrets.VERCEL_TOKEN }} | grep -oP '(?<=https:\/\/data-center-)[^ ]*')  # Ambil UID dari URL
         echo "Deployments: $deployments"
 
     - name: Remove old deployments
       run: |
-        # Ambil list deployment dan simpan UID
-        deployments=$(vercel ls --json --token ${{ secrets.VERCEL_TOKEN }} | jq -r '.[].uid')
-        
-        # Ambil deployment kedua dan lebih lama (jika ada)
-        old_deployment=$(echo "$deployments" | sed -n '2p')  # Ambil deployment kedua dari list
+        # Periksa jumlah deployment yang ada
+        num_deployments=$(echo "$deployments" | wc -l)
+        echo "Number of deployments: $num_deployments"
 
-        if [ ! -z "$old_deployment" ]; then
-          echo "Removing old deployment $old_deployment"
-          vercel rm $old_deployment --token ${{ secrets.VERCEL_TOKEN }} --yes
+        if [ "$num_deployments" -gt 1 ]; then
+          # Ambil deployment kedua dan lebih lama (jika ada)
+          old_deployment=$(echo "$deployments" | sed -n '2p')  # Ambil deployment kedua dari list
+
+          if [ ! -z "$old_deployment" ]; then
+            echo "Removing old deployment $old_deployment"
+            vercel rm $old_deployment --token ${{ secrets.VERCEL_TOKEN }} --yes
+          else
+            echo "No old deployment found to remove"
+          fi
+        else
+          echo "Only one deployment found, no old deployment to remove"
         fi
