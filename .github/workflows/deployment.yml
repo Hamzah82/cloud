@@ -20,12 +20,14 @@ jobs:
 
     - name: Get Vercel deployments
       run: |
-        # Mendapatkan list deployment dan memproses output dengan jq
-        deployments=$(vercel ls --token ${{ secrets.VERCEL_TOKEN }} | grep -oP '(?<=https:\/\/data-center-)[^ ]*')  # Ambil UID dari URL
+        deployments=$(vercel ls --json --token ${{ secrets.VERCEL_TOKEN }} | jq -r '.[].uid')
         echo "Deployments: $deployments"
 
     - name: Remove old deployments
       run: |
+        # Ambil list deployment dan simpan UID
+        deployments=$(vercel ls --json --token ${{ secrets.VERCEL_TOKEN }} | jq -r '.[].uid')
+
         # Periksa jumlah deployment yang ada
         num_deployments=$(echo "$deployments" | wc -l)
         echo "Number of deployments: $num_deployments"
