@@ -1,0 +1,31 @@
+name: Deploy to Vercel and clean up old deployments
+
+on:
+  push:
+    branches:
+      - main  # Ganti dengan branch yang kamu gunakan
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy to Vercel
+      run: |
+        npm install -g vercel
+        vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+
+    - name: Get Vercel deployments
+      run: |
+        deployments=$(vercel ls --json --token ${{ secrets.VERCEL_TOKEN }} | jq -r '.[].uid')
+        echo "Deployments: $deployments"
+        
+    - name: Remove old deployments
+      run: |
+        old_deployment=$(vercel ls --json --token ${{ secrets.VERCEL_TOKEN }} | jq -r '.[1].uid') # Ambil deployment kedua
+        if [ ! -z "$old_deployment" ]; then
+          vercel rm $old_deployment --token ${{ secrets.VERCEL_TOKEN }} --yes
+        fi
