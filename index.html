@@ -118,9 +118,23 @@
       font-size: 14px;
       color: #aaa;
     }
+
     .donate-btn:hover {
-    transform: scale(1.1);
-    background-color: #3b8bcc;
+      transform: scale(1.1);
+      background-color: #3b8bcc;
+    }
+
+    #loading {
+      text-align: center;
+      margin-top: 20px;
+      color: #aaa;
+    }
+
+    #errorMessage {
+      text-align: center;
+      color: #f00;
+      font-weight: bold;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -147,16 +161,36 @@
     </div>
 
     <ul id="fileList"></ul>
+    <div id="loading" style="display: none;">Loading...</div>
+    <div id="errorMessage" style="display: none;"></div>
   </div>
 
   <script>
     async function loadFiles() {
-      const res = await fetch("list.json?v=" + Date.now());
-      const files = await res.json();
+      const loading = document.getElementById("loading");
+      const errorMessage = document.getElementById("errorMessage");
       const listEl = document.getElementById("fileList");
       const searchEl = document.getElementById("search");
 
-      function renderList(filter = "") {
+      // Menampilkan loading indicator
+      loading.style.display = "block";
+      errorMessage.style.display = "none";  // Menyembunyikan error message
+
+      try {
+        const res = await fetch("list.json?v=" + Date.now());
+        if (!res.ok) throw new Error('Failed to fetch data');
+
+        const files = await res.json();
+        renderList(files);
+        loading.style.display = "none"; // Menyembunyikan loading setelah data selesai dimuat
+      } catch (err) {
+        loading.style.display = "none"; // Menyembunyikan loading jika terjadi error
+        errorMessage.style.display = "block";
+        errorMessage.textContent = "Gagal memuat data. Coba lagi nanti.";
+        console.error("Error fetching data: ", err);
+      }
+
+      function renderList(files, filter = "") {
         const visibleFiles = files.filter(file =>
           file.name.toLowerCase().includes(filter.toLowerCase())
         );
@@ -197,23 +231,22 @@
       }
 
       searchEl.addEventListener("input", () => {
-        renderList(searchEl.value);
+        renderList(files, searchEl.value);
       });
-
-      renderList();
     }
 
     loadFiles();
   </script>
-<a href="https://trakteer.id/woka/tip" target="_blank"
-   class="donate-btn"
-   style="position: fixed; bottom: 20px; right: 20px; 
-          background-color: #4ea1ff; color: white; 
-          padding: 12px 16px; border-radius: 30px; 
-          font-size: 14px; font-weight: bold; 
-          text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
-          transition: all 0.3s ease; z-index: 999;">
-  ☕ Donate
-</a>
+
+  <a href="https://trakteer.id/woka/tip" target="_blank"
+     class="donate-btn"
+     style="position: fixed; bottom: 20px; right: 20px; 
+            background-color: #4ea1ff; color: white; 
+            padding: 12px 16px; border-radius: 30px; 
+            font-size: 14px; font-weight: bold; 
+            text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+            transition: all 0.3s ease; z-index: 999;">
+    ☕ Donate
+  </a>
 </body>
 </html>
