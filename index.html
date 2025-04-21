@@ -185,7 +185,7 @@
       errorMessage.style.display = "none";  // Menyembunyikan error message
 
       try {
-        const res = await fetch("listo.json?v=" + Date.now());
+        const res = await fetch("list.json?v=" + Date.now());
         if (!res.ok) throw new Error('Failed to fetch data');
 
         const files = await res.json();
