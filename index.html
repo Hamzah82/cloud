@@ -129,8 +129,16 @@
       margin-top: 20px;
       color: #aaa;
     }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
 
     #errorMessage {
+      animation: shake 0.5s ease-in-out;
       text-align: center;
       color: #f00;
       font-weight: bold;
@@ -177,7 +185,7 @@
       errorMessage.style.display = "none";  // Menyembunyikan error message
 
       try {
-        const res = await fetch("list.json?v=" + Date.now());
+        const res = await fetch("listo.json?v=" + Date.now());
         if (!res.ok) throw new Error('Failed to fetch data');
 
         const files = await res.json();
