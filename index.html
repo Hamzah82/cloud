@@ -194,7 +194,7 @@
       } catch (err) {
         loading.style.display = "none"; // Menyembunyikan loading jika terjadi error
         errorMessage.style.display = "block";
-        errorMessage.textContent = "Gagal memuat data. Coba lagi nanti.";
+        errorMessage.textContent = "Database error, try again later.";
         console.error("Error fetching data: ", err);
       }
 
