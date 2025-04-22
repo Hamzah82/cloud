@@ -16,8 +16,7 @@
       width: 100%;
       max-width: 800px;
       margin: 40px auto;
-      padding-left: 20px;
-      padding-right: 20px;
+      padding: 0 20px;
       box-sizing: border-box;
     }
 
@@ -36,7 +35,6 @@
       background-color: #1e1e1e;
       color: #fff;
       box-sizing: border-box;
-      display: block;
     }
 
     ul {
@@ -81,35 +79,6 @@
       color: #888;
     }
 
-    .upload-btn {
-      display: block;
-      padding: 10px;
-      margin-bottom: 5px;
-      border-radius: 6px;
-      background-color: #4ea1ff;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      box-sizing: border-box;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .upload-btn.status {
-      background-color: #2d7acc;
-    }
-
-    .upload-btn:hover {
-      background-color: #3b8bcc;
-      transform: scale(1.05);
-    }
-
-    .upload-btn.status:hover {
-      background-color: #276db1;
-      transform: scale(1.05);
-    }
-
     .info {
       text-align: right;
     }
@@ -141,57 +110,74 @@
       margin-top: 20px;
     }
 
-    /* Gear icon button */
+    /* Floating gear button */
     .gear-btn {
       position: fixed;
       bottom: 20px;
-      right: 80px;
+      right: 20px;
       background-color: #4ea1ff;
-      color: white;
-      padding: 12px 16px;
+      border: none;
       border-radius: 50%;
-      font-size: 18px;
-      font-weight: bold;
-      text-decoration: none;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: all 0.3s ease;
       z-index: 999;
+      transition: transform 0.3s ease;
     }
 
-    .gear-btn:hover {
-      transform: scale(1.1);
-      background-color: #3b8bcc;
+    .gear-btn.spin {
+      transform: rotate(180deg);
     }
 
-    .gear-menu {
+    .menu {
       position: fixed;
-      bottom: 70px;
+      bottom: 80px;
       right: 20px;
       background-color: #1e1e1e;
+      border-radius: 12px;
       padding: 10px;
-      border-radius: 8px;
-      display: none;
+      display: flex;
       flex-direction: column;
       gap: 10px;
-      animation: fadeIn 0.3s ease-out;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 998;
     }
 
-    .gear-menu a {
+    .menu.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .menu.show a {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.3s ease forwards;
       text-decoration: none;
-      color: #4ea1ff;
-      font-size: 14px;
+      background-color: #4ea1ff;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
       font-weight: bold;
+      font-size: 14px;
     }
 
-    .gear-menu a:hover {
-      color: #3b8bcc;
-    }
+    .menu.show a:nth-child(1) { animation-delay: 0.05s; }
+    .menu.show a:nth-child(2) { animation-delay: 0.1s; }
+    .menu.show a:nth-child(3) { animation-delay: 0.15s; }
+    .menu.show a:nth-child(4) { animation-delay: 0.2s; }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-
   </style>
 </head>
 <body>
@@ -209,11 +195,9 @@
     <div id="errorMessage" style="display: none;"></div>
   </div>
 
-  <!-- Gear Button -->
-  <a href="javascript:void(0);" class="gear-btn" id="gearBtn">⚙️</a>
-
-  <!-- Gear Menu -->
-  <div class="gear-menu" id="gearMenu">
+  <!-- Gear Button & Menu -->
+  <button class="gear-btn" id="gearBtn">⚙️</button>
+  <div class="menu" id="gearMenu">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1vXaw9C034ri_L6OsAzkp_hfHDIOT3Dd9HkA8qZV-FetxWg/viewform?usp=header" target="_blank">+ Upload File</a>
     <a href="/about">About</a>
     <a href="/status">Status</a>
@@ -223,7 +207,6 @@
   <script>
     let files = [];
 
-    // Load files from list.json
     async function loadFiles() {
       const loading = document.getElementById("loading");
       const errorMessage = document.getElementById("errorMessage");
@@ -258,13 +241,9 @@
           const li = document.createElement("li");
 
           if (file.url.startsWith("/")) {
-            li.onclick = () => {
-              window.location.href = file.url;
-            };
+            li.onclick = () => window.location.href = file.url;
           } else {
-            li.onclick = () => {
-              window.open(file.url, "_blank");
-            };
+            li.onclick = () => window.open(file.url, "_blank");
           }
 
           const number = visibleFiles.length - index;
@@ -293,13 +272,14 @@
 
     loadFiles();
 
-    // Gear menu functionality
+    // Gear Menu toggle
     const gearBtn = document.getElementById("gearBtn");
     const gearMenu = document.getElementById("gearMenu");
 
-    gearBtn.onclick = () => {
-      gearMenu.style.display = gearMenu.style.display === "flex" ? "none" : "flex";
-    };
+    gearBtn.addEventListener("click", () => {
+      gearMenu.classList.toggle("show");
+      gearBtn.classList.toggle("spin");
+    });
   </script>
 </body>
 </html>
