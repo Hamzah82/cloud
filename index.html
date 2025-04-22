@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -9,195 +10,201 @@
       font-family: Arial, sans-serif;
       background-color: #121212;
       color: #fff;
-    }.container {
-  width: 100%;
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
+    }
 
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
-}
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
 
-input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  border: none;
-  font-size: 16px;
-  background-color: #1e1e1e;
-  color: #fff;
-  box-sizing: border-box;
-  display: block;
-}
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+      background-color: #1e1e1e;
+      color: #fff;
+      box-sizing: border-box;
+    }
 
-li {
-  background-color: #1e1e1e;
-  margin-bottom: 12px;
-  padding: 15px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-li:hover {
-  background-color: #2c2c2c;
-}
+    li {
+      background-color: #1e1e1e;
+      margin-bottom: 12px;
+      padding: 15px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
 
-.left {
-  display: flex;
-  align-items: center;
-}
+    li:hover {
+      background-color: #2c2c2c;
+    }
 
-.icon {
-  font-size: 22px;
-  margin-right: 12px;
-}
+    .left {
+      display: flex;
+      align-items: center;
+    }
 
-.file-name {
-  font-weight: bold;
-  color: #4ea1ff;
-  word-break: break-word;
-}
+    .icon {
+      font-size: 22px;
+      margin-right: 12px;
+    }
 
-.type {
-  font-size: 12px;
-  color: #888;
-}
+    .file-name {
+      font-weight: bold;
+      color: #4ea1ff;
+      word-break: break-word;
+    }
 
-.info {
-  text-align: right;
-}
+    .type {
+      font-size: 12px;
+      color: #888;
+    }
 
-.size {
-  font-size: 14px;
-  color: #aaa;
-}
+    .info {
+      text-align: right;
+    }
 
-#loading {
-  text-align: center;
-  margin-top: 20px;
-  color: #aaa;
-}
+    .size {
+      font-size: 14px;
+      color: #aaa;
+    }
 
-#errorMessage {
-  animation: shake 0.5s ease-in-out;
-  text-align: center;
-  color: #f00;
-  font-weight: bold;
-  margin-top: 20px;
-}
+    #loading {
+      text-align: center;
+      margin-top: 20px;
+      color: #aaa;
+    }
 
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-}
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
 
-#gearBtn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #4ea1ff;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 1000;
-  transition: transform 0.3s ease;
-}
+    #errorMessage {
+      animation: shake 0.5s ease-in-out;
+      text-align: center;
+      color: #f00;
+      font-weight: bold;
+      margin-top: 20px;
+    }
 
-#gearBtn.spin {
-  transform: rotate(180deg);
-}
+    /* Floating gear button */
+    .gear-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #4ea1ff;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 999;
+      transition: transform 0.3s ease;
+    }
 
-#gearMenu {
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  background-color: #1e1e1e;
-  padding: 10px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  display: none;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 999;
-}
+    .gear-btn.spin {
+      transform: rotate(180deg);
+    }
 
-#gearMenu.show {
-  display: flex;
-}
+    .menu {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 998;
+    }
 
-#gearMenu a {
-  background-color: #4ea1ff;
-  padding: 10px;
-  border-radius: 6px;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  opacity: 0;
-  transform: translateY(20px);
-}
+    .menu.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-@keyframes slideUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    .menu.show a {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.3s ease forwards;
+      text-decoration: none;
+      background-color: #4ea1ff;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
 
-@keyframes slideDown {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-}
+    .menu.show a:nth-child(1) { animation-delay: 0.05s; }
+    .menu.show a:nth-child(2) { animation-delay: 0.1s; }
+    .menu.show a:nth-child(3) { animation-delay: 0.15s; }
+    .menu.show a:nth-child(4) { animation-delay: 0.2s; }
 
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
+
   <div class="container">
     <h1>💾 Data Center 🖥️</h1>
     <p style="text-align:center; font-size: 14px; color: #aaa; margin-top: -20px; margin-bottom: 30px;">
       Made with 💙 by hamzah82
-    </p><input type="text" id="search" placeholder="Search files..." />
+    </p>
 
-<ul id="fileList"></ul>
-<div id="loading" style="display: none;">Loading...</div>
-<div id="errorMessage" style="display: none;"></div>
+    <input type="text" id="search" placeholder="Search files..." />
 
-  </div><button id="gearBtn">⚙️</button>
+    <ul id="fileList"></ul>
+    <div id="loading" style="display: none;">Loading...</div>
+    <div id="errorMessage" style="display: none;"></div>
+  </div>
 
-  <div id="gearMenu">
+  <!-- Gear Button & Menu -->
+  <button class="gear-btn" id="gearBtn">⚙️</button>
+  <div class="menu" id="gearMenu">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1vXaw9C034ri_L6OsAzkp_hfHDIOT3Dd9HkA8qZV-FetxWg/viewform?usp=header" target="_blank">+ Upload File</a>
     <a href="/about">About</a>
     <a href="/status">Status</a>
-    <a href="https://trakteer.id/woka/tip" target="_blank">Donate</a>
-  </div>  <script>
+    <a href="https://trakteer.id/woka/tip" target="_blank">☕ Donate</a>
+  </div>
+
+  <script>
     let files = [];
 
     async function loadFiles() {
@@ -265,30 +272,14 @@ li:hover {
 
     loadFiles();
 
+    // Gear Menu toggle
     const gearBtn = document.getElementById("gearBtn");
     const gearMenu = document.getElementById("gearMenu");
-    const menuLinks = gearMenu.querySelectorAll("a");
 
     gearBtn.addEventListener("click", () => {
-      if (gearMenu.classList.contains("show")) {
-        menuLinks.forEach((link, i) => {
-          link.style.animation = `slideDown 0.2s ease forwards`;
-          link.style.animationDelay = `${(menuLinks.length - i) * 0.05}s`;
-        });
-        setTimeout(() => {
-          gearMenu.classList.remove("show");
-          gearBtn.classList.remove("spin");
-        }, menuLinks.length * 50 + 200);
-      } else {
-        gearMenu.classList.add("show");
-        gearBtn.classList.add("spin");
-        menuLinks.forEach((link, i) => {
-          link.style.opacity = "0";
-          link.style.transform = "translateY(20px)";
-          link.style.animation = `slideUp 0.3s ease forwards`;
-          link.style.animationDelay = `${i * 0.05}s`;
-        });
-      }
+      gearMenu.classList.toggle("show");
+      gearBtn.classList.toggle("spin");
     });
-  </script></body>
-</html>
+  </script>
+</body>
+  </html>
