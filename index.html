@@ -119,16 +119,12 @@
       color: #aaa;
     }
 
-    .donate-btn:hover {
-      transform: scale(1.1);
-      background-color: #3b8bcc;
-    }
-
     #loading {
       text-align: center;
       margin-top: 20px;
       color: #aaa;
     }
+
     @keyframes shake {
       0% { transform: translateX(0); }
       25% { transform: translateX(-5px); }
@@ -143,6 +139,58 @@
       color: #f00;
       font-weight: bold;
       margin-top: 20px;
+    }
+
+    .fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #4ea1ff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 26px;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .fab:hover {
+      transform: rotate(90deg);
+    }
+
+    .menu {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      padding: 10px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .menu a {
+      text-decoration: none;
+      background-color: #4ea1ff;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+
+    .menu a:hover {
+      background-color: #3b8bcc;
     }
   </style>
 </head>
@@ -173,6 +221,16 @@
     <div id="errorMessage" style="display: none;"></div>
   </div>
 
+  <!-- Gear Button & Menu -->
+  <div class="fab" id="gearBtn">⚙️</div>
+
+  <div class="menu" id="gearMenu">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1vXaw9C034ri_L6OsAzkp_hfHDIOT3Dd9HkA8qZV-FetxWg/viewform?usp=header" target="_blank">+ Upload</a>
+    <a href="/status">Status</a>
+    <a href="/about">About</a>
+    <a href="https://trakteer.id/woka/tip" target="_blank">☕ Donate</a>
+  </div>
+
   <script>
     let files = [];
 
@@ -182,19 +240,18 @@
       const listEl = document.getElementById("fileList");
       const searchEl = document.getElementById("search");
 
-      // Menampilkan loading indicator
       loading.style.display = "block";
-      errorMessage.style.display = "none";  // Menyembunyikan error message
+      errorMessage.style.display = "none";
 
       try {
         const res = await fetch("list.json?v=" + Date.now());
         if (!res.ok) throw new Error('Failed to fetch data');
 
-        files = await res.json(); // Menyimpan data files
-        renderList(files); // Render list pertama kali
-        loading.style.display = "none"; // Menyembunyikan loading setelah data selesai dimuat
+        files = await res.json();
+        renderList(files);
+        loading.style.display = "none";
       } catch (err) {
-        loading.style.display = "none"; // Menyembunyikan loading jika terjadi error
+        loading.style.display = "none";
         errorMessage.style.display = "block";
         errorMessage.textContent = "Database error, try again later.";
         console.error("Error fetching data: ", err);
@@ -210,7 +267,6 @@
         visibleFiles.forEach((file, index) => {
           const li = document.createElement("li");
 
-          // Pengecekan URL internal atau eksternal
           if (file.url.startsWith("/")) {
             li.onclick = () => {
               window.location.href = file.url;
@@ -246,17 +302,15 @@
     }
 
     loadFiles();
-  </script>
 
-  <a href="https://trakteer.id/woka/tip" target="_blank"
-     class="donate-btn"
-     style="position: fixed; bottom: 20px; right: 20px; 
-            background-color: #4ea1ff; color: white; 
-            padding: 12px 16px; border-radius: 30px; 
-            font-size: 14px; font-weight: bold; 
-            text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
-            transition: all 0.3s ease; z-index: 999;">
-    ☕ Donate
-  </a>
+    // Gear menu toggle
+    const gearBtn = document.getElementById("gearBtn");
+    const gearMenu = document.getElementById("gearMenu");
+
+    gearBtn.addEventListener("click", () => {
+      gearMenu.style.display = gearMenu.style.display === "flex" ? "none" : "flex";
+      gearBtn.style.transform = gearMenu.style.display === "flex" ? "rotate(180deg)" : "rotate(0deg)";
+    });
+  </script>
 </body>
 </html>
