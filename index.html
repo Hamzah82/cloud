@@ -16,8 +16,7 @@
       width: 100%;
       max-width: 800px;
       margin: 40px auto;
-      padding-left: 20px;
-      padding-right: 20px;
+      padding: 0 20px;
       box-sizing: border-box;
     }
 
@@ -36,7 +35,6 @@
       background-color: #1e1e1e;
       color: #fff;
       box-sizing: border-box;
-      display: block;
     }
 
     ul {
@@ -79,35 +77,6 @@
     .type {
       font-size: 12px;
       color: #888;
-    }
-
-    .upload-btn {
-      display: block;
-      padding: 10px;
-      margin-bottom: 5px;
-      border-radius: 6px;
-      background-color: #4ea1ff;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      box-sizing: border-box;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .upload-btn.status {
-      background-color: #2d7acc;
-    }
-
-    .upload-btn:hover {
-      background-color: #3b8bcc;
-      transform: scale(1.05);
-    }
-
-    .upload-btn.status:hover {
-      background-color: #276db1;
-      transform: scale(1.05);
     }
 
     .info {
@@ -171,11 +140,21 @@
       background-color: #1e1e1e;
       border-radius: 12px;
       padding: 10px;
-      display: none;
+      display: flex;
       flex-direction: column;
       gap: 10px;
       z-index: 999;
       box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      opacity: 0;
+      transform: scale(0.9);
+      pointer-events: none;
+      transition: all 0.2s ease;
+    }
+
+    .menu.show {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
     }
 
     .menu a {
@@ -203,19 +182,6 @@
     </p>
 
     <input type="text" id="search" placeholder="Search files..." />
-
-    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1vXaw9C034ri_L6OsAzkp_hfHDIOT3Dd9HkA8qZV-FetxWg/viewform?usp=header" target="_blank" class="upload-btn" style="flex: 2;">
-        + Upload File
-      </a>
-      <a href="/about" class="upload-btn status" style="flex: 1;">
-        About
-      </a>
-      <a href="/status" class="upload-btn status" style="flex: 1;">
-        Status
-      </a>
-    </div>
-
     <ul id="fileList"></ul>
     <div id="loading" style="display: none;">Loading...</div>
     <div id="errorMessage" style="display: none;"></div>
@@ -303,13 +269,12 @@
 
     loadFiles();
 
-    // Gear menu toggle
+    // Gear menu toggle with animation
     const gearBtn = document.getElementById("gearBtn");
     const gearMenu = document.getElementById("gearMenu");
 
     gearBtn.addEventListener("click", () => {
-      gearMenu.style.display = gearMenu.style.display === "flex" ? "none" : "flex";
-      gearBtn.style.transform = gearMenu.style.display === "flex" ? "rotate(180deg)" : "rotate(0deg)";
+      gearMenu.classList.toggle("show");
     });
   </script>
 </body>
