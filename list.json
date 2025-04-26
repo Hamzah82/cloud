@@ -1,8 +1,15 @@
 [
   {
+    "name": "Image Compressor",
+    "url": "https://hamzah82.github.io/imageCompressor/",
+    "size": "N/A",
+    "type": "Website",
+    "icon": "🖼️"
+  },
+  {
     "name": "ZIP Cracker",
     "url": "https://github.com/Hamzah82/zipCracker",
-    "size": "?",
+    "size": "N/A",
     "type": "Github Repo",
     "icon": "🔐"
   },
