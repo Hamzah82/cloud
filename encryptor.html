@@ -40,14 +40,26 @@
       return binary.split(' ').map(b => String.fromCharCode(parseInt(b, 2))).join('');
     }
 
+    function reverseText(text) {
+      return text.split('').reverse().join('');
+    }
+
+    function xorCipher(text, key) {
+      return [...text].map(c => String.fromCharCode(c.charCodeAt(0) ^ key)).join('');
+    }
+
     function encrypt(text) {
       text = caesar(text, 4);
       text = rot13(text);
+      text = reverseText(text); // Layer 1: Reverse text
+      text = xorCipher(text, 123); // Layer 2: XOR with key 123
       text = caesar(text, -5);
       text = textToBinary(text);
       text = btoa(text);
       text = caesar(text, 5);
       text = rot13(text);
+      text = xorCipher(text, 987); // Layer 3: XOR with key 987
+      text = reverseText(text); // Layer 4: Reverse text again
       text = caesar(text, -4);
       return text;
     }
@@ -55,7 +67,8 @@
     function decrypt(text) {
       text = caesar(text, 4);
       text = rot13(text);
-      text = caesar(text, -5);
+      text = xorCipher(text, 987); // Layer 3: XOR with key 987
+      text = reverseText(text); // Layer 4: Reverse text
       try {
         text = atob(text);
       } catch (e) {
@@ -64,6 +77,8 @@
       text = binaryToText(text);
       text = caesar(text, 5);
       text = rot13(text);
+      text = xorCipher(text, 123); // Layer 2: XOR with key 123
+      text = reverseText(text); // Layer 1: Reverse text again
       text = caesar(text, -4);
       return text;
     }
