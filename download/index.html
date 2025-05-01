@@ -105,15 +105,16 @@
           container.innerHTML = `
             <h1>${file.name}</h1>
             <p>${file.description}</p>
-            <p class="download-note">
+            <div class="download-note">
               <small>
-                ⚠️ Link broken? Don't rage quit! Report it to me instead!
+                <span class="download-note-icon">⚠️</span>
+                <strong>Link broken?</strong> Don't rage quit! Report it to me instead!
+                <br><br>
+                📧 Email: <a href="mailto:wokabi108@gmail.com">wokabi108@gmail.com</a>
                 <br>
-                📧 <a href="mailto:wokabi108@gmail.com">wokabi108@gmail.com</a>
-                <br>
-                📸 <a href="https://instagram.com/d38r15" target="_blank">@d38r15</a> (Instagram)
+                📸 Instagram: <a href="https://instagram.com/d38r15" target="_blank">@d38r15</a>
               </small>
-            </p>
+            </div>
             <a href="${file.link}" target="_blank" class="button">🚀 Download Now</a>
             <br/><br/>
             <a href="/" class="button">⬅ Back to Home</a>
