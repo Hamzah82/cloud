@@ -214,5 +214,11 @@
       "name": "7-Zip Portable (Ultimate Compression Toolkit)",
       "description": "The open-source archiving powerhouse in a portable executable that runs anywhere—no admin rights needed. This enhanced version includes: context menu integration (optional), benchmark tools for comparing compression methods, and scripts to automate multi-volume encrypted backups. Supports 87 formats: from standard ZIP/RAR to exotic ones like QCOW2 virtual disks and Nintendo ROM files. Advanced features: hardware-accelerated LZMA2 compression (AVX2/ARMv8 optimized), pre-configured profiles for maximum ratio (ZSTD 22) vs speed (LZ4), and a 'Paranoid Mode' that verifies archives with SHA-256 after creation. The only tool you'll need to handle everything from simple extractions to forensic-grade data preservation.",
       "link": "https://mega.nz/file/ZNBhwChS#xwsigc63qS7FfUnhsRIOu05i3JsKh300VrvZmL5hyBc"
+    },
+    {
+      "number": 999,
+      "name": "Easter egg",
+      "description": "Congrats, you find a easter egg!!, well... just this... you can go (Click download)",
+      "link": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
     }
   ]
