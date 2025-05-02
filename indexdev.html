@@ -169,11 +169,11 @@
       pointer-events: auto;
     }
 
-    .menu.show a {
+    .menu.show a,
+    .donate-menu-toggle {
       opacity: 0;
       transform: translateY(20px);
       animation: slideUp 0.3s ease forwards;
-      text-decoration: none;
       background-color: #4ea1ff;
       color: white;
       padding: 10px;
@@ -181,7 +181,16 @@
       text-align: center;
       font-weight: bold;
       font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
     }
+
+    .menu.show a:hover,
+    .donate-menu-toggle:hover {
+      background-color: #3a8ad6;
+    }
+
 
     .menu.show a:nth-child(1) { animation-delay: 0.05s; }
     .menu.show a:nth-child(2) { animation-delay: 0.1s; }
