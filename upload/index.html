@@ -9,7 +9,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #121212;
+            background-color: #0a0a0a;
             color: #e0e0e0;
             height: 100vh;
             display: flex;
@@ -18,57 +18,63 @@
         
         .header {
             text-align: center;
-            padding: 20px 0;
-            background-color: #1e1e1e;
+            padding: 15px 0;
+            background-color: #121212;
+            border-bottom: 1px solid #333;
         }
         
         h1 {
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #ffffff;
+            font-weight: 400;
+            letter-spacing: 1px;
         }
         
         .form-container {
             flex: 1;
             display: flex;
-            flex-direction: column;
-            padding: 10px;
+            padding: 0;
         }
         
         .iframe-wrapper {
             flex: 1;
-            min-height: 0; /* Fix for Firefox */
+            min-height: 0;
         }
         
         .responsive-iframe {
             width: 100%;
             height: 100%;
             border: none;
-            background-color: #1e1e1e;
+            filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.95);
         }
         
         .footer {
             text-align: center;
-            padding: 10px;
-            font-size: 0.8rem;
-            color: #888;
+            padding: 8px;
+            font-size: 0.7rem;
+            color: #555;
+            background-color: #121212;
+            border-top: 1px solid #333;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>UPLOAD FILE</h1>
+        <h1>UPLOAD DOCUMENT</h1>
     </div>
     
     <div class="form-container">
         <div class="iframe-wrapper">
             <!-- Ganti URL dengan Google Form Anda -->
-            <iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSc1vXaw9C034ri_L6OsAzkp_hfHDIOT3Dd9HkA8qZV-FetxWg/viewform?embedded=true"></iframe>
+            <iframe class="responsive-iframe" 
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSc1vXaw9C034ri_L6OsAzkp_hfHDIOT3Dd9HkA8qZV-FetxWg/viewform?embedded=true&hl=en&theme=dark">
+            </iframe>
         </div>
     </div>
     
     <div class="footer">
-        Form powered by Google Forms
+        Secure Form Submission
     </div>
 </body>
 </html>
