@@ -3,86 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulir Upload File</title>
+    <title>Upload File</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            line-height: 1.6;
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
+            padding: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #1e1e1e;
         }
         
         h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 30px;
+            margin: 0;
+            font-size: 1.5rem;
+            color: #ffffff;
         }
         
-        .form-description {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            border-left: 4px solid #3498db;
+        .form-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
         }
         
-        .iframe-container {
-            position: relative;
-            overflow: hidden;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            margin-bottom: 30px;
+        .iframe-wrapper {
+            flex: 1;
+            min-height: 0; /* Fix for Firefox */
         }
         
         .responsive-iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
             width: 100%;
             height: 100%;
             border: none;
+            background-color: #1e1e1e;
         }
         
-        .note {
-            font-size: 0.9em;
-            color: #7f8c8d;
+        .footer {
             text-align: center;
-            margin-top: 20px;
+            padding: 10px;
+            font-size: 0.8rem;
+            color: #888;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Formulir Upload File</h1>
-        
-        <div class="form-description">
-            <p>Silakan isi formulir di bawah ini untuk mengunggah file Anda. Pastikan file yang diupload sesuai dengan ketentuan yang berlaku.</p>
-            <p><strong>Ketentuan Upload:</strong></p>
-            <ul>
-                <li>File dalam format .pdf, .docx, .xlsx, atau .jpg</li>
-                <li>Ukuran maksimal file: 10MB</li>
-                <li>Nama file tidak boleh mengandung karakter khusus</li>
-            </ul>
+    <div class="header">
+        <h1>UPLOAD FILE</h1>
+    </div>
+    
+    <div class="form-container">
+        <div class="iframe-wrapper">
+            <!-- Ganti URL dengan Google Form Anda -->
+            <iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSc1vXaw9C034ri_L6OsAzkp_hfHDIOT3Dd9HkA8qZV-FetxWg/viewform?embedded=true"></iframe>
         </div>
-        
-        <!-- Ganti URL di bawah ini dengan URL Google Form Anda -->
-        <div class="iframe-container">
-            <iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSc1vXaw9C034ri_L6OsAzkp_hfHDIOT3Dd9HkA8qZV-FetxWg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
-        </div>
-        
-        <p class="note">Jika formulir tidak muncul, silakan <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank">klik di sini</a> untuk membuka formulir di tab baru.</p>
+    </div>
+    
+    <div class="footer">
+        Form powered by Google Forms
     </div>
 </body>
 </html>
