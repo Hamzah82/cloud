@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://datacenter.ct.ws/$1",
+      "permanent": true
+    }
+  ]
+}
